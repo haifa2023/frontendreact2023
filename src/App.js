@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Listarticles from './components/articles/Listarticles';
+import {BrowserRouter as Router, Routes,Route } from 'react-router-dom';
+import Menu from './components/Menu';
+import Listcategories from './components/categories/Listcategories'
+import Cart from './components/articles/Cart';
+import StripePayment from './components/articles/StripePayment';
+import CheckoutSuccess from './components/articles/CheckoutSuccess';
+import PdfCart from './components/articles/PdfCart';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import ProductsAppAdmin from './admin/components/articles/ProductsAppAdmin';
+import { ToastContainer } from 'react-toastify';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ToastContainer/>
+      <Router>
+      <Menu/>
+        <Routes>
+        <Route path='/articlecard' element={<Listarticles/>}/>
+        <Route path='/categories' element={<Listcategories/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/pay/:total' element={<StripePayment/>}/>
+        <Route path="/ckeckout" element={<CheckoutSuccess/>}/>
+        <Route path="/pdfcart" element={<PdfCart/>}/>
+        <Route path='/articlesadmin' element={<ProductsAppAdmin/>}/>
+        
+
+        </Routes>
+      
+      </Router>
     </div>
   );
 }
